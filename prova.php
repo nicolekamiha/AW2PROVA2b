@@ -11,14 +11,20 @@
         
         $n= $_POST['watt'];
         $k = $_POST['hora'];
-        $r= $n*$k;
+        $r= $n*$k/1000;
         $cons= $r*30;
     
+        session_start();
+        $_SESSION['soma'] = $_SESSION['soma'] + $cons;
         echo "<hr>";
-        echo "consumo: ";
+        echo "Consumo total: ";
+
+         echo $_SESSION['soma']; echo" Kw/H";
+        echo "<hr>";
+        echo "Consumo: ";
         print_r( $r); echo " Kw/H";
         echo "<hr>";
-        echo "consumo mensal: ";  print_r( $cons); " Kw/H";
+        echo "Consumo mensal: ";  print_r( $cons); echo" Kw/H";
         echo "<hr>";
 
         $equipa = $_POST['aparelho'];
@@ -39,9 +45,12 @@
         fwrite($fp, var_export($cons, true));
     
         
-        fclose($fp);
-    
-        
+      
+
+        fwrite($fp, var_export("Consumo total:", true));
+        fwrite($fp, $_SESSION['soma'], true);
+      
+fclose($fp);
 }
  else{
         echo 'preencha os campos';
