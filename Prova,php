@@ -12,7 +12,7 @@
         $n= $_POST['watt'];
         $k = $_POST['hora'];
         $r= $n*$k/1000;
-        $cons= $r*30;
+        $cons= $r*31;
     
         session_start();
         $_SESSION['soma'] = $_SESSION['soma'] + $cons;
